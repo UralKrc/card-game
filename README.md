@@ -1,5 +1,4 @@
-# sortable-list
-
+# card-game
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
@@ -68,9 +67,9 @@ yarn run test:e2e -- --debug
 
 ```sh
 yarn run lint
+```
 
 ### Game Rules 
-
 => The game consists of 4 players and spans 5 rounds,
 => In each round, an additional card is dealt to every player,
 => ♣ (Spades) awards 4 points, ♦ (Diamonds) awards 3 points, ♥ (Hearts) awards 2 points, and ♠ (Clubs) awards 1 point,
