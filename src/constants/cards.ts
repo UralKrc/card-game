@@ -13,3 +13,6 @@ export const NUMERIC_VALUES = {
 };
 
 export const HIDDEN_CARD_SYMBOLS = new Array(16).fill('♦');
+
+export const SUITS: string[] = ['clubs', 'hearts', 'diamonds', 'spades'];
+export const VALUES: string[] = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];

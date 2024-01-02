@@ -1,4 +1,4 @@
-import { NUMERIC_VALUES, SUIT_POINTS } from '@/constants';
+import { NUMERIC_VALUES, SUITS, SUIT_POINTS, VALUES } from '@/constants';
 import { defineStore } from 'pinia';
 
 export type Card = {
@@ -20,9 +20,6 @@ export type SuitPoints = {
   diamonds: number;
   clubs: number;
 };
-
-const SUITS: string[] = ['spades', 'hearts', 'diamonds', 'clubs'];
-const VALUES: string[] = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
 export const useStore = defineStore({
   id: 'game',
@@ -53,14 +50,11 @@ export const useStore = defineStore({
     },
 
     sortPlayerHand(player: Card[]): Card[] {
-      const suitsOrder = ['clubs', 'hearts', 'diamonds', 'spades'];
-      const valuesOrder = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-
       player.sort((a, b) => {
-        if (suitsOrder.indexOf(a.suit) - suitsOrder.indexOf(b.suit) !== 0) {
-          return suitsOrder.indexOf(a.suit) - suitsOrder.indexOf(b.suit);
+        if (SUITS.indexOf(a.suit) - SUITS.indexOf(b.suit) !== 0) {
+          return SUITS.indexOf(a.suit) - SUITS.indexOf(b.suit);
         } else {
-          return valuesOrder.indexOf(a.value) - valuesOrder.indexOf(b.value);
+          return VALUES.indexOf(a.value) - VALUES.indexOf(b.value);
         }
       });
       
@@ -76,11 +70,7 @@ export const useStore = defineStore({
 
       this.players = this.players.map(() => {
         const hand = this.sortPlayerHand(this.dealCards(this.deck, 5));
-        const [firstCard, ...restOfHand] = hand;
-        const revealedFirstCard = { ...firstCard, isHidden: false };
-        const newHand = [revealedFirstCard, ...restOfHand];
-
-        return newHand;
+        return [{ ...hand[0], isHidden: false }, ...hand.slice(1)];
       });
 
       this.updateScores();
