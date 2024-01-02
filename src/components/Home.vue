@@ -6,14 +6,6 @@ import GameRules from './GameRules.vue';
 const store = useStore();
 const isGameRulesOpen = ref(false);
 
-const openGameRulesModal = () => {
-  isGameRulesOpen.value = true;
-};
-
-const closeGameRulesModal = () => {
-  isGameRulesOpen.value = false;
-};
-
 const startNewGame = () => store.startNewGame();
 </script>
 
@@ -25,11 +17,11 @@ const startNewGame = () => store.startNewGame();
   <button
     class="shadow bg-purple-700 hover:bg-purple-600 h-10 px-6 mt-5 font-semibold rounded-md border border-slate-200 text-slate-200"
     type="button"
-    @click="openGameRulesModal"
+    @click="isGameRulesOpen = true"
   >
     Game Rules
   </button>
-  <GameRules :closeGameRulesModal="closeGameRulesModal" :isGameRulesOpen="isGameRulesOpen" />
+  <GameRules v-model:is-open="isGameRulesOpen" />
   <button
     class="shadow bg-green-700 hover:bg-green-600 h-10 px-6 mt-5 font-semibold rounded-md border border-slate-200 text-slate-200"
     type="button"

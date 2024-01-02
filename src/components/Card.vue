@@ -103,6 +103,10 @@ const pipTotalByValue = computed(() => {
   }
 });
 
+const shouldGiveRedColor = (cardSuit: string) => {
+  return (cardSuit === 'hearts' || cardSuit === 'diamonds');
+};
+
 </script>
 
 <template>
@@ -125,32 +129,32 @@ const pipTotalByValue = computed(() => {
         class="bg-white shadow-md h-full w-full rounded-md" 
         :class="isActive ? 'border-green-600 border-2' : 'border-slate-200 border'">
       <div class="flex flex-col items-center absolute left-1 top-1 md:left-2 md:top-2">
-        <div class="text-sm" :class="(suitSymbol === '♥' || suitSymbol === '♦') && 'text-red-600'">
+        <div class="text-sm" :class="(card.suit === 'hearts' || card.suit === 'diamonds') && 'text-red-600'">
           {{ card.value }}
         </div>
         <div class="text-xs -mt-1" 
-             :class="(suitSymbol === '♥' || suitSymbol === '♦') && 'text-red-600'"
+            :class="{'text-red-600': shouldGiveRedColor(card.suit)}"
              v-html="suitSymbol" 
         />
       </div>
       <div class="flex flex-col-reverse items-center absolute right-1 bottom-1 md:right-2">
-        <div class="rotate-180 text-sm" :class="(suitSymbol === '♦' || suitSymbol === '♥') && 'text-red-600'">
+        <div class="rotate-180 text-sm" :class="{'text-red-600': shouldGiveRedColor(card.suit)}">
           {{ card.value }}
         </div>
         <div class="text-xs -mb-1" 
-             :class="(suitSymbol === '♥' || suitSymbol === '♦') && 'text-red-600'" 
+            :class="{'text-red-600': shouldGiveRedColor(card.suit)}"
              v-html="suitSymbol" 
         />
       </div>
       <div class="grid grid-rows-5 grid-cols-5 w-full h-full justify-center items-center py-2 text-xs md:text-3xl lg:text-xl">
         <div v-for="n in pipTotalByValue" :key="n" 
              class="text-center"
-             :class="{'text-red-600': (suitSymbol === '♥' || suitSymbol === '♦'), [pipClassByValue]: true}"
+             :class="{'text-red-600': shouldGiveRedColor(card.suit), [pipClassByValue]: true}"
         >
           <span 
             v-if="(card.value === 'J' || card.value === 'Q' || card.value === 'K' || card.value === 'A')"
             class="relative h-full w-full flex items-center justify-center bg-gray-100 sm:text-4xl"
-            :class="(suitSymbol === '♥' || suitSymbol === '♦') && 'text-red-600'" 
+            :class="{'text-red-600': shouldGiveRedColor(card.suit)}"
           >
             <span class="absolute -top-10 left-0 rotate-45 bg-gray-500 border border-slate-900 w-4 h-full" />
             <span class="absolute -top-10 right-0 -rotate-45 bg-gray-500 border border-slate-900 w-4 h-full" />

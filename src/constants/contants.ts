@@ -12,4 +12,4 @@ export const NUMERIC_VALUES = {
   A: 14,
 };
 
-export const HIDDEN_CARD_SYMBOLS = ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'];
+export const HIDDEN_CARD_SYMBOLS = new Array(16).fill('♦');

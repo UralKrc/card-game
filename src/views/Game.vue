@@ -1,18 +1,12 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
-import { useStore } from '../stores/index';
+import { useStore, type Card } from '@/stores/index';
 import Player from '@/components/Player.vue';
 import EndGameModal from '@/components/EndGameModal.vue';
 import Home from '@/components/Home.vue';
 
-export type PlayerTypes = {
-  suit: string;
-  value: string;
-  isHidden: boolean;
-}[];
-
 const store = useStore();
-const players = ref<PlayerTypes[]>(store.players);
+const players = ref<Card[][]>(store.players);
 
 watch(
   () => store.players,
@@ -55,7 +49,7 @@ const currentRound = computed(() => store.currentRound);
           <p class="font-semibold pl-2 mb-1 text-xl">Player {{ index + 1 }}</p>
           <Player
             :cards="cards"
-            :currentRound="currentRound"
+            :current-round="currentRound"
             :points="store.roundScores[index]"
           />
         </div>

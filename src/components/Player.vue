@@ -11,7 +11,7 @@ defineProps(['cards', 'currentRound', 'points']);
         v-for="(card, index) in cards"
         :key="index"
         :card="card"
-        :isActive="currentRound === index + 1"
+        :is-active="currentRound === index + 1"
       />
     </div>
     <div>

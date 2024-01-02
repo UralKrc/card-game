@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { closeGameRulesModal, isGameRulesOpen } = defineProps(['closeGameRulesModal', 'isGameRulesOpen']);
+defineProps(['isOpen']);
+const emit = defineEmits(['update:isOpen']);
 
 const gameRules = [
   'The game consists of 4 players and spans 5 rounds.',
@@ -11,11 +12,11 @@ const gameRules = [
 </script>
 
 <template>
-  <div class="fixed bg-black bg-opacity-30 min-h-screen z-10 w-full -translate-y-full duration-500" :class="isGameRulesOpen && 'translate-y-0'">
+  <div class="fixed bg-black bg-opacity-30 min-h-screen z-10 w-full -translate-y-full duration-500" :class="isOpen && 'translate-y-0'">
     <div class="text-right">
       <button 
         class="inline-flex justify-center items-center p-2 h-10 w-10 font-semibold m-4 bg-white rounded-full"
-        @click="closeGameRulesModal"
+        @click="() => emit('update:isOpen', false)"
         data-testid="close-modal"
       >
         &times;
